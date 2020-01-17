@@ -1,0 +1,15 @@
+{
+  "name": "link-bucket",
+  "version": "1.0.0",
+  "description": "Share links in real time with others in a simple bucket",
+  "main": "app.js",
+  "repository": "https://github.com/Simolation/link-bucket.git",
+  "author": "Simon Osterlehner <simon@osterlehner.de>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1",
+    "randomstring": "^1.1.5",
+    "socket.io": "^2.3.0"
+  }
+}
