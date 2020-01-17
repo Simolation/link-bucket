@@ -1,0 +1,58 @@
+body {
+  background-color: #edf0f5;
+  font-family: "Roboto", sans-serif;
+}
+
+.text-blue {
+  color: #4070f4;
+}
+
+.bg-blue {
+  background-color: #4070f4;
+}
+
+.border-blue {
+  border-color: #4070f4;
+}
+
+.bg-blue:hover {
+  background-color: #2b53c3;
+}
+
+.border-blue:hover {
+  border-color: #2b53c3;
+}
+
+.height-1 {
+  height: 2px;
+}
+
+.height-16 {
+  height: 16px;
+  width: 16px;
+}
+
+.wrap {
+  word-break: break-all;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

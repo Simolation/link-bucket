@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Link bucket</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="/assets/style.css" rel="stylesheet" />
+  </head>
+  <body class="h-screen">
+    <div id="app" class="flex h-screen">
+      <div class="m-auto">
+        <div class="max-w-6xl overflow-hidden mt-6">
+          <div class="px-6 flex md:items-center flex-col md:flex-row">
+            <div class="mb-2">
+              <p class="font-bold text-sm text-gray-700">
+                Your bucket:
+              </p>
+              <p class="font-bold md:text-5xl text-4xl">{{bucketCode}}</p>
+              <p class="text-sm text-gray-600">{{connectedCount}} online</p>
+            </div>
+            <form
+              class="w-full rounded-lg bg-white p-6 md:ml-12"
+              @submit.prevent="addLink"
+            >
+              <div
+                class="flex items-center border-b border-b-2 border-blue py-2"
+              >
+                <input
+                  class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-2 leading-tight focus:outline-none"
+                  type="url"
+                  ref="linkInput"
+                  required
+                  autofocus
+                  placeholder="https://..."
+                  aria-label="Your link"
+                  v-model="linkInput"
+                />
+                <button
+                  class="flex-shrink-0 bg-blue border-blue text-sm border-4 text-white py-1 px-2 rounded"
+                  type="submit"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <transition name="fade" mode="out-in">
+          <div
+            v-if="connectedCount <= 1"
+            class="bg-orange-100 text-orange-700 px-4 py-3 rounded-lg relative mx-6 mt-4 md:mt-2"
+            role="alert"
+          >
+            <strong class="font-bold">Watch out!</strong>
+            <span class="block sm:inline"
+              >No one's joined your bucket yet. The links are not saved and are
+              only transferred when someone has joined your bucket.</span
+            >
+            <br />
+            <p class="block">Share the bucket: {{currentUrl}}</p>
+          </div>
+        </transition>
+        <div
+          class="max-w-6xl rounded-lg overflow-hidden bg-white md:m-6 mx-6 mt-4"
+        >
+          <div class="">
+            <div class="font-bold text-xl mb-2 text-blue px-6 pt-6">Links</div>
+            <transition name="fade" mode="out-in">
+              <p v-if="getLinks.length == 0" class="p-6 text-gray-700">
+                No links yet
+              </p>
+              <transition-group
+                name="list"
+                tag="div"
+                v-if="getLinks.length != 0"
+              >
+                <a
+                  v-for="(link, index) in getLinks"
+                  class="block hover:bg-gray-100"
+                  :href="link.link"
+                  :key="link.time"
+                  target="_blank"
+                >
+                  <div class="py-6 px-6 flex items-center">
+                    <img :src="link.favicon" class="mr-4 height-16" />
+                    <p class="wrap">{{ link.link }}</p>
+                  </div>
+                  <div
+                    class="height-1 bg-gray-200"
+                    v-if="index != getLinks.length - 1"
+                  ></div>
+                </a>
+              </transition-group>
+            </transition>
+          </div>
+        </div>
+        <div
+          class="max-w-6xl rounded-lg overflow-hidden bg-white md:m-6 mx-6 mt-4 mb-6"
+        >
+          <div class="p-8">
+            <div class="font-bold text-xl mb-2">What are link buckets for?</div>
+            <p class="text-gray-700 text-base">
+              Sometimes you just want to quickly share a link with friends or
+              colleagues, but it's not practical to send it via WhatsApp or
+              email.<br />
+              Instead, you could simply create a link bucket and when everyone
+              opened the bucket, you can add your links and they will be shared
+              in real time.<br />
+              With respect for privacy, the links are not stored on the server.
+              As soon as you close the page, all links are deleted.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="/assets/app.js"></script>
+  </body>
+</html>
