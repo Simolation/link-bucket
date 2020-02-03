@@ -1,10 +1,10 @@
-name: Deploy
+name: Link Bucket
 on:
   push:
     branches:
       - master
 jobs:
-  build:
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
