@@ -1,11 +1,11 @@
-name: Link Bucket
+name: Deploy
 on:
   push:
     branches:
       - master
 jobs:
   deploy:
-    name: Deploy
+    name: SSH deployment
     runs-on: ubuntu-latest
     steps:
     - name: Run ssh deployment
