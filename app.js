@@ -56,7 +56,7 @@ io.on("connection", function(socket) {
 });
 
 // Start the server on the given port
-server.listen(process.env.PORT || 3001);
+server.listen(process.env.PORT || 8080);
 
 // Helper function that gets the users that are connected within a specific bucket
 function getBucketUsers(bucket) {
