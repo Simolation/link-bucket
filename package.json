@@ -13,7 +13,7 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start": "PORT=3001 pm2 start app.js --name 'link-bucket'",
+    "start": "PORT=3001 pm2 start app.js --name 'link-bucket' -i max",
     "restart": "pm2 reload link-bucket"
   }
 }
